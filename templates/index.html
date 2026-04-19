@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retail AI Analytics Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Real-Time AI-Powered Retail Analytics Dashboard</h1>
+        <p class="subtitle">Sales Forecasting + Sentiment Analysis</p>
+
+        <div class="kpi-container">
+            <div class="card">
+                <h3>Total Orders</h3>
+                <p>{{ total_orders }}</p>
+            </div>
+
+            <div class="card">
+                <h3>Total Customers</h3>
+                <p>{{ total_customers }}</p>
+            </div>
+
+            <div class="card">
+                <h3>Total Sales</h3>
+                <p>₹ {{ total_sales }}</p>
+            </div>
+
+            <div class="card">
+                <h3>Positive Reviews</h3>
+                <p>{{ positive_reviews }}</p>
+            </div>
+        </div>
+
+        <div class="main-grid">
+            <div class="form-box">
+                <h2>Sentiment Analysis</h2>
+                <form action="/predict_sentiment" method="post">
+                    <label for="review_text">Enter Customer Review</label>
+                    <textarea name="review_text" rows="6" placeholder="Type customer review here..." required></textarea>
+                    <button type="submit">Predict Sentiment</button>
+                </form>
+
+                {% if sentiment_result %}
+                    <div class="result-box">
+                        <h3>Prediction Result</h3>
+                        <p><strong>{{ sentiment_result }}</strong></p>
+                        <p>{{ sentiment_message }}</p>
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="form-box">
+                <h2>Sales Forecasting</h2>
+                <form action="/predict_sales" method="post">
+                    <label for="day_number">Enter Future Day Number</label>
+                    <input type="number" name="day_number" placeholder="Example: 750" required>
+                    <button type="submit">Predict Sales</button>
+                </form>
+
+                {% if sales_result %}
+                    <div class="result-box">
+                        <h3>Forecast Result</h3>
+                        <p><strong>Predicted Sales: ₹ {{ sales_result }}</strong></p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="info-box">
+            <h2>About This Project</h2>
+            <p>
+                This beginner-friendly retail analytics application uses machine learning models
+                to predict customer review sentiment and future sales. It combines cleaned retail
+                data, saved ML models, and a simple Flask frontend for realistic project demonstration.
+            </p>
+        </div>
+    </div>
+
+</body>
+</html>

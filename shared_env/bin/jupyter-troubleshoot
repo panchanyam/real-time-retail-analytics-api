@@ -1,0 +1,8 @@
+#!/bin/sh
+'''exec' "/Users/samaira_jayapandiyan/Desktop/Day 89&90/Mini-Projects/shared_env/bin/python" "$0" "$@"
+' '''
+import sys
+from jupyter_core.troubleshoot import main
+if __name__ == '__main__':
+    sys.argv[0] = sys.argv[0].removesuffix('.exe')
+    sys.exit(main())
